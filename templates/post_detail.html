@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>{{ post_id.title }}</h2>
+<img src="{{ post_id.image.url }}" alt="">
+<p><i>Кртакое описание: </i> {{ post_id.description }}</p>
+{% if post_id.audio %}
+    {% if post_id.audio.url %}
+        <audio controls>
+            <source src="{{ post_id.audio.url }}" type="audio/mp3">
+            Your browser does not support the audio tag.
+        </audio>
+    {% else %}
+        <p>Error: The 'music' attribute has no file associated with it.</p>
+    {% endif %}
+{% endif %}
+<p>{{ post_id.category_news }}</p>
+<p>{{ post_id.time_news }}</p>
+<p><i>Автор: </i>{{ post_id.author }}</p>
+<p>{{ i.created_at }}</p>
+
+</body>
+</html>
