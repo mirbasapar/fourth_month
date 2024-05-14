@@ -1,0 +1,38 @@
+{% include 'header.html' %}
+
+<center>
+<div class="card" style="width: 18rem;">
+  <img src="{{ post_id.image.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text">{{ books_id.title }}</p>
+    <p class="card-text">{{ books_id.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+{% if books_id.audio %}
+    {% if books_id.audio.url %}
+        <audio controls>
+            <source src="{{ post_id.audio.url }}" type="audio/mp3">
+            Your browser does not support the audio tag.
+        </audio>
+    {% else %}
+        <p>Error: The 'music' attribute has no file associated with it.</p>
+    {% endif %}
+{% endif %}
+      <li class="list-group-item"><p><i>Автор: </i>{{ books_id.author }}</p></li>
+  </ul>
+</div>
+</center>
+<h2>Отзывы</h2>
+<table border="2">
+    <tr>
+        <td>Оценка</td> <td>Отзыв</td> <td>Дата отзыва</td>
+    </tr>
+    {% for i in books_id.review_book.all %}
+    <tr>
+        <td>{{ i.stars }}</td> <td>{{ i.description }}</td> <td>{{ i.created_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% include 'footer.html' %}

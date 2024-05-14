@@ -1,7 +1,8 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-class PostBooks(models.Model):
+class Books(models.Model):
     CATEGORY_BOOKS = (
         ('Художественная литература', 'Художественная литература'),
         ('Информационная технология', 'Информационная технология'),
@@ -31,6 +32,19 @@ class PostBooks(models.Model):
 
 
     class Meta:
-        verbose_name = 'книг'
+        verbose_name = 'книги'
         verbose_name_plural = 'список книг'
-# Create your models here.
+
+
+class Review(models.Model):
+    review_book = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='review_book')
+    stars = models.PositiveIntegerField(default=10, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    description = models.TextField(verbose_name='Краткое описание', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.review_book}-{self.stars}'
+
+    class Meta:
+        verbose_name = 'отзывы'
+        verbose_name_plural = 'отзывы'

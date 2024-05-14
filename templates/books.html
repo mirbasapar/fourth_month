@@ -1,0 +1,18 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<ul>
+    {% for i in books %}
+    <br>
+    <li>
+        <img src="{{ i.image.url }}" alt="" width="300" height="500">
+        <p>{{ i.created_at }}</p>
+        <h2><a href="/books/{{ i.id }}">{{ i.title }}</a></h2>
+    </li>
+        <br>
+        <hr>
+        <hr>
+        <hr>
+    {% endfor %}
+</ul>
+{% include 'footer.html' %}

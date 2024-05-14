@@ -1,20 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from datetime import datetime
-from .models import PostBooks
+from .models import Books
 
 
-def post_books_view(request):
+def books_view(request):
     if request.method == 'GET':
-        posts = PostBooks.objects.filter().order_by('-id')
-        return render(request, template_name='post.html',
-                      context={'posts': posts})
+        books = Books.objects.filter().order_by('-id')
+        return render(request, template_name='books.html', context={'books': books})
 
-def post_books_detail_view(request, id):
+def books_detail_view(request, id):
     if request.method == 'GET':
-        post_id = get_object_or_404(PostBooks, id=id)
-        return render(request, template_name='post_detail.html',
-                      context={'post_id': post_id})
+        books_id = get_object_or_404(Books, id=id)
+        return render(request, template_name='books_detail.html', context={'books_id': books_id})
 
 
 def name_view(request):

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+    <ol>
+        {% for i in cloth %}
+        <li>
+            <h1>{{ i.name }}</h1>
+            <p>{{ i.price }}</p>
+            {% for j in i.tags.all %}
+                <p>#{{ j.name }}</p>
+            {% endfor %}
+        </li>
+            <hr>
+            <hr>
+            <hr>
+        {% endfor %}
+    </ol>
+
+    <button><a href="/male/">Мужкая одежда</a></button>
+    <button><a href="/female/">Женская одежда</a></button>
+    <button><a href="/kids/">Детская одежда</a></button>
+</center>
+</body>
+</html>
