@@ -1,17 +1,46 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from datetime import datetime
-from .models import Books
+from . import models, forms
+
+
+def update_book_view(request, id):
+    book_id = get_object_or_404(models.Books, id=id)
+    if request.method == 'POST':
+        form = forms.BookForm(request.POST, instance=book_id)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h3>Book edited!</h3>')
+    else:
+        form = forms.BookForm(instance=book_id)
+    return render(request, template_name='edit.html', context={'book_id': book_id, 'form': form})
+
+
+def delete_book_view(request, id):
+    book_id = get_object_or_404(models.Books, id=id)
+    book_id.delete()
+    return HttpResponse('Book deleted')
+
+
+def create_review_view(request, id):
+    if request.method == 'POST':
+        form = forms.BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h1>Your review has been added!</h1>')
+    else:
+        form = forms.BookForm()
+    return render(request, template_name='create_review.html', context={'form': form})
 
 
 def books_view(request):
     if request.method == 'GET':
-        books = Books.objects.filter().order_by('-id')
+        books = models.Books.objects.filter().order_by('-id')
         return render(request, template_name='books.html', context={'books': books})
 
 def books_detail_view(request, id):
     if request.method == 'GET':
-        books_id = get_object_or_404(Books, id=id)
+        books_id = get_object_or_404(models.Books, id=id)
         return render(request, template_name='books_detail.html', context={'books_id': books_id})
 
 
