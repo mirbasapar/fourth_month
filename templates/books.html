@@ -4,8 +4,8 @@
 
 {% for i in books %}
     <center>
-        <button><a href="/books/{{ book_id.id }}/update/">Изменить</a></button>
-        <button><a href="/books/{{ book_id.id }}/delete/">Удалить</a></button>
+        <button><a href="/books/{{ i.id }}/update/">Изменить</a></button>
+        <button><a href="/books/{{ i.id }}/delete/">Удалить</a></button>
         <br>
         <div class="card" style="width: 18rem;">
             <img src="{{ i.image.url }}" alt="" width="285" height="500">
