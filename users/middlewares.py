@@ -19,7 +19,9 @@ class ClubMiddleware(MiddlewareMixin):
             elif exp > 10:
                 request.club = "Руководитель"
             else:
-                return HttpResponseBadRequest("Извините вы не подходите для регистрации")
+                return HttpResponseBadRequest(
+                    "Извините вы не подходите для регистрации"
+                )
 
         elif request.path == "/register/" and request.method == "GET":
             setattr(request, "club", "клуб не определен.")

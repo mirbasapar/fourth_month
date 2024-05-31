@@ -8,26 +8,50 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0002_rename_postbooks_books_alter_books_options'),
+        ("books", "0002_rename_postbooks_books_alter_books_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='books',
+            name="books",
             options={},
         ),
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('stars', models.PositiveIntegerField(default=5, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(10)])),
-                ('description', models.TextField(blank=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('review_book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='review_book', to='books.books')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "stars",
+                    models.PositiveIntegerField(
+                        default=5,
+                        validators=[
+                            django.core.validators.MinValueValidator(1),
+                            django.core.validators.MaxValueValidator(10),
+                        ],
+                    ),
+                ),
+                ("description", models.TextField(blank=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "review_book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="review_book",
+                        to="books.books",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'книг',
-                'verbose_name_plural': 'список книг',
+                "verbose_name": "книг",
+                "verbose_name_plural": "список книг",
             },
         ),
     ]

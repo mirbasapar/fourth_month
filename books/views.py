@@ -6,26 +6,27 @@ from . import models, forms
 
 
 class SearchBookView(generic.ListView):
-    template_name = 'books.html'
-    context_object_name = 'books'
+    template_name = "books.html"
+    context_object_name = "books"
     paginate_by = 10
 
     def get_queryset(self):
-        return models.Books.objects.filter(title__icontains=self.request.GET.get('q'))
+        return models.Books.objects.filter(title__icontains=self.request.GET.get("q"))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         contex = super().get_context_data(**kwargs)
-        contex['q'] = self.request.GET.get('q')
+        contex["q"] = self.request.GET.get("q")
         return contex
 
 
 class BooksView(generic.ListView):
-    template_name = 'books.html'
-    context_object_name = 'books'
+    template_name = "books.html"
+    context_object_name = "books"
     model = models.Books
 
     def get_queryset(self):
-        return self.model.objects.filter().order_by('-id')
+        return self.model.objects.filter().order_by("-id")
+
 
 # def books_view(request):
 #     if request.method == 'GET':
@@ -35,11 +36,11 @@ class BooksView(generic.ListView):
 
 
 class BookDetailView(generic.DetailView):
-    template_name = 'books_detail.html'
-    context_object_name = 'books_id'
+    template_name = "books_detail.html"
+    context_object_name = "books_id"
 
     def get_object(self, **kwargs):
-        books_id = self.kwargs.get('id')
+        books_id = self.kwargs.get("id")
         return get_object_or_404(models.Books, id=books_id)
 
 
@@ -50,12 +51,12 @@ class BookDetailView(generic.DetailView):
 
 
 class UpdateBookView(generic.UpdateView):
-    template_name = 'edit.html'
+    template_name = "edit.html"
     form_class = forms.BookForm
-    success_url = '/books/'
+    success_url = "/books/"
 
     def get_object(self, **kwargs):
-        books_id = self.kwargs.get('id')
+        books_id = self.kwargs.get("id")
         return get_object_or_404(models.Books, id=books_id)
 
     def form_valid(self, form):
@@ -76,11 +77,11 @@ class UpdateBookView(generic.UpdateView):
 
 
 class DeleteBookView(generic.DetailView):
-    template_name = 'confirm_delete.html'
-    success_url = 'books'
+    template_name = "confirm_delete.html"
+    success_url = "books"
 
     def get_object(self, **kwargs):
-        books_id = self.kwargs.get('id')
+        books_id = self.kwargs.get("id")
         return get_object_or_404(models.Books, id=books_id)
 
 
@@ -92,9 +93,9 @@ class DeleteBookView(generic.DetailView):
 
 
 class CreateReviewView(generic.CreateView):
-    template_name = 'create_review.html'
+    template_name = "create_review.html"
     form_class = forms.ReviewForm
-    success_url = '/books/'
+    success_url = "/books/"
 
     def form_valid(self, form):
         print(form.cleaned_data)
@@ -113,17 +114,19 @@ class CreateReviewView(generic.CreateView):
 
 
 def name_view(request):
-    if request.method == 'GET':
-        return HttpResponse('Я, Сапаров Мирбек. Мне 35 лет.')
+    if request.method == "GET":
+        return HttpResponse("Я, Сапаров Мирбек. Мне 35 лет.")
 
 
 def hobby_view(request):
-    if request.method == 'GET':
-        return HttpResponse('Люблю путешествовать и отдых')
+    if request.method == "GET":
+        return HttpResponse("Люблю путешествовать и отдых")
 
 
 def time_view(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         now = datetime.now()
-        return HttpResponse(f'Текущее время: {now}')
+        return HttpResponse(f"Текущее время: {now}")
+
+
 # Create your views here.

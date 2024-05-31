@@ -7,26 +7,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0003_alter_books_options_review'),
+        ("books", "0003_alter_books_options_review"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='books',
-            options={'verbose_name': 'книги', 'verbose_name_plural': 'список книг'},
+            name="books",
+            options={"verbose_name": "книги", "verbose_name_plural": "список книг"},
         ),
         migrations.AlterModelOptions(
-            name='review',
-            options={'verbose_name': 'отзывы', 'verbose_name_plural': 'отзывы'},
+            name="review",
+            options={"verbose_name": "отзывы", "verbose_name_plural": "отзывы"},
         ),
         migrations.AlterField(
-            model_name='review',
-            name='description',
-            field=models.TextField(blank=True, verbose_name='Краткое описание'),
+            model_name="review",
+            name="description",
+            field=models.TextField(blank=True, verbose_name="Краткое описание"),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='stars',
-            field=models.PositiveIntegerField(default=10, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(10)]),
+            model_name="review",
+            name="stars",
+            field=models.PositiveIntegerField(
+                default=10,
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(10),
+                ],
+            ),
         ),
     ]

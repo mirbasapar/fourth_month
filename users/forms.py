@@ -1,4 +1,3 @@
-
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from . import models
@@ -6,10 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-GENDER = (
-    ("Male", "Male"),
-    ("Female", "Female")
-)
+GENDER = (("Male", "Male"), ("Female", "Female"))
 
 
 class CustomRegistrationForm(UserCreationForm):
@@ -52,7 +48,7 @@ def set_exp(sender, instance, created, **kwargs):
         print("Сигнал обработан пользователь создан")
         exp = instance.experience
         if exp < 1:
-            instance.club = 'Стажер'
+            instance.club = "Стажер"
         elif 1 <= exp <= 2:
             instance.club = "Младший специалист"
         elif 2 <= exp <= 3:
@@ -64,5 +60,5 @@ def set_exp(sender, instance, created, **kwargs):
         elif exp > 10:
             instance.club = "Руководитель"
         else:
-            instance.club = 'Должность не определен'
+            instance.club = "Должность не определен"
         instance.save()
