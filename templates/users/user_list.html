@@ -1,0 +1,32 @@
+{% include 'header.html'%}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <ul>
+        {% for i in object_list %}
+                <li>
+                <h1>Привет - {{ i.username }}</h1>
+                <p>Почта - {{ i.email }}</p>
+                <p>Имя - {{ i.name }}</p>
+                <p>Возраст - {{ i.age }}</p>
+                {% if i.club %}
+                <p>Ваша должность - {{ i.club }}</p>
+                {% else %}
+                <p>Должность не определена</p>
+                {% endif %}
+                 </li>
+        {% endfor %}
+    </ul>
+<form action="{% url 'users:login' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Выйти</button>
+</form>
+
+</div>
+
+</body>
+</html>
